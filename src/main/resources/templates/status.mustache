@@ -1,0 +1,84 @@
+{{>header}}
+<script>
+  $( function() {
+    $( "#statusDate" ).datepicker();
+    $("#team").val("{{{team}}}");
+  } );
+</script>
+
+<h1>{{h1}}</h2>
+  <p class="lead"><span style="text-transform:capitalize;">{{username}}</span>, enter a new status, select the team this applies to, and the date of the status update.</p>
+  <div class="row">
+    <div class="col-8">
+      <form action="/status" method="post">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="team">Team</label>
+              <!-- <input type="text" id="team" name="team" class="form-control" required></input> -->
+              <select id="team" name="team" class="form-control" required>
+                {{#teams}}
+                  <option>{{.}}</option>
+                {{/teams}}
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="statusDate">Date</label>
+              <input type="date" placeholder="mm/dd/yyyy" id="statusDate" name="statusDate" class="form-control" required value={{statusDate}}></input>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="statusText">Status Text</label>
+              <textarea placeholder="Enter your status here" class="form-control" id="statusText" name="statusText" rows=3 required>{{statusText}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+        <input type="hidden" name="type" value="statusUpdate" />
+        <input type="hidden" name="id" value="{{{id}}}" />
+        <input type="hidden" name="rev" value="{{{rev}}}" />
+        <input name="_csrf" type="hidden" value="{{_csrf.token}}" />
+        <button class="btn btn-primary" type="submit">Create</button>
+      </form>
+    </div>
+  </div>
+    </div>
+    <div class="col">
+      <img src="/images/shih-tzuSm.png" class="img-fluid" />
+
+      {{#showDelete}}
+      <div class="mt-3 text-center">
+        <form action="/status/delete" method="post" class="form">
+          <div class="form-group">
+            <input type="hidden" name="type" value="statusUpdate" />
+            <input name="_csrf" type="hidden" value="{{_csrf.token}}" />
+            <input type="hidden" name="id" value="{{{id}}}" />
+            <input type="hidden" name="rev" value="{{{rev}}}" />
+            <input type="hidden" name="team" value="{{{team}}}" />
+            <input type="hidden" name="statusDate" value="{{{statusDate}}}" />
+            <input type="hidden" name="statusText" value="{{{statusText}}}" />
+            <button type="submit" class="btn btn-danger btn-sm" type="submit">Delete Status</button>
+          </div>
+        </form>
+      </div>
+      {{/showDelete}}
+    </div>
+  </div>
+  <!--
+  <div class="row">
+    <div class="col">
+    -->
+      <h4 class="mt-2">Latest Status Updates</h4>
+      {{>statusesTable}}
+      <!--
+    </div>
+  </div>
+-->
+  {{>footer}}

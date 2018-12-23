@@ -1,0 +1,17 @@
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th scope="col">Team</th>
+    <th scope="col">Date</th>
+    <th scope="col">Text</th>
+    <th scope="col"><img src="/images/pencilSm.png" alt="Edit Column" class="img-fluid"/></th>
+  </tr>
+</thead>
+<tbody>
+  {{#statuses}}
+  <tr>
+    <td>{{team}}</td> <td>{{statusDate}}</td> <td>{{statusText}}</td> <td><a href="/status/{{id}}">Edit</a></td>
+  </tr>
+  {{/statuses}}
+</tbody>
+</table>

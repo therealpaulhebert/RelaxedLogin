@@ -1,0 +1,50 @@
+{{>header}}
+<h1>Latest Status Updates <img src="/images/pugSm.png" class="img mt-2" height="90px" alt="Pug Silhouette" /></h1>
+<p class="lead">Select a filter to show updates for a specific team.</p>
+
+<div class="row">
+
+  <div class="col-2">
+    <div class="dropdown mb-2">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filter Teams
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <a href="/" class="dropdown-item">All Teams</a>
+        {{#userTeams}}
+          <a href="/byTeam/{{.}}" class="dropdown-item">{{.}}</a>
+        {{/userTeams}}
+      </div>
+      </div>
+  </div>
+
+  <div class="col">
+      <form action="/status/search" method="post" class="form-inline">
+        <div class="form-group ml-auto">
+          <input type="text" class="form-control" id="search" name="search" placeholder="Enter search text"></input>
+        </div>
+        <input name="_csrf" type="hidden" value="{{_csrf.token}}" />
+        <button type="submit" class="btn btn-primary ml-2">Search</button>
+      </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    {{>statusesTable}}
+  </div>
+  <!--
+<div class="col">
+  <img src="/images/pugSm.png" class="img mt-5 ml-auto" height="60px" alt="Pug Silhouette" />
+</div>
+-->
+</div>
+<!--
+<div class="list-group">
+  {{#statuses}}
+  <a href="/status/{{id}}" class="list-group-item list-group-item-action">{{team}}: {{statusDate}} - {{statusText}}</a>
+  {{/statuses}}
+  {{{message}}}
+</div>
+--->
+{{>footer}}

@@ -1,0 +1,88 @@
+{{>header}}
+<h1>Application Configuration</h1>
+<p class="lead">Update your application level roles below.</p>
+<div class="row">
+  <div class="col-8">
+    <form action="/config/update" method="post" modelAttribute="appConfig">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="name">Admin Role</label>
+            <input type="text" id="appConfig.adminRole.name" name="adminRole.name" class="form-control" value="{{appConfig.adminRole.name}}" required></input>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="name">Role Description</label>
+            <input type="text" id="adminRoleDescr" name="adminRole.description" class="form-control" value="{{appConfig.adminRole.description}}" required></input>
+          </div>
+        </div>
+      </div>
+
+          <div class="form-row">
+            <div class="col-sm-6">
+              <label for="roles">Name</label>
+            </div>
+            <div class="col-sm-6">
+              <label for="roles">Description</label>
+            </div>
+          </div>
+
+      {{#appConfig.roles}}
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+              <input type="text" name="roles.name" class="form-control" value="{{name}}"></input>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+              <input type="text" name="roles.description" class="form-control" value="{{description}}"></input>
+          </div>
+        </div>
+      </div>
+      {{/appConfig.roles}}
+
+      <div class="row">
+        <div class="col">
+          <h4>Add a new role</h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="roles">Name</label>
+              <input type="text" name="roles.name" class="form-control" ></input>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="roles">Description</label>
+              <input type="text" name="roles.description" class="form-control" ></input>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col ml-auto">
+          <!--
+          <input type="hidden" id="id" name="id" value="" />
+          <input type="hidden" id="rev" name="rev" value="" />
+        -->
+          <input type="hidden" id="id" name="id" value="{{appConfig.id}}" />
+          <input type="hidden" id="rev" name="rev" value="{{appConfig.rev}}" />
+          <input name="_csrf" type="hidden" value="{{_csrf.token}}" />
+          <button class="btn btn-primary ml-auto" type="submit">Save Configuration</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col">
+    <img src="/images/beardmanSm.png" class="img-fluid" />
+  </div>
+
+</div>
+{{>footer}}

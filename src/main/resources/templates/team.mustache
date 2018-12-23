@@ -1,0 +1,150 @@
+{{>header}}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".deleteButton").click(function() {
+
+      var id = $(this).attr("id");
+      var nameSelector = "#" + id + "_members_roles";
+      var roleSelector = "#" + id + "_members_names";
+
+      $(nameSelector).val("");
+      $(roleSelector).val("");
+
+      console.log("Delete" + nameSelector);
+
+    });
+
+    {{#team.members}}
+     $("#{{name}}_members_roles").val("{{role}}");
+    {{/team.members}}
+
+  });
+</script>
+
+<h1>{{h1}}</h1>
+<p class="lead">Edit the information and members of the team.</p>
+<div class="row">
+  <div class="col-9">
+    <h4>Edit Team Infomation</h4>
+    <form action="/team/update" method="post" modelAttribute="team">
+      <div class="form-row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="name">Team Name</label>
+            <input type="text" id="name" name="name" class="form-control" required value="{{team.name}}"></input>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" class="form-control" value="{{team.description}}"></input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-row">
+            <div class="col">
+              <h4>Edit Team Members</h4>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="members.names">Name</label>
+            </div>
+            <div class="col">
+              <label for="members.roles">Role</label>
+            </div>
+            <div class="col-1">
+
+            </div>
+          </div>
+          {{#team.members}}
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <!-- <input type="text" id="members.names" name="members.names" class="form-control" value="{{name}}" disabled></input> -->
+                  <select id="{{name}}_members_names" name="members.names" class="form-control">
+                    <option selected>{{name}}</option>
+                  </select>
+
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <!-- <input type="text" id="members.roles" name="members.roles" class="form-control" value="{{role}}"></input> -->
+                  <select id="{{name}}_members_roles" name="members.roles" class="form-control">
+                    {{#roles}}
+                      <option>{{name}}</option>
+                    {{/roles}}
+                  </select>
+                </div>
+              </div>
+              <div class="col-1">
+                <img src="/images/delete.png" class="img deleteButton" id="{{name}}" width="20px" />
+              </div>
+            </div>
+          {{/team.members}}
+
+          <div class="form-row">
+            <div class="col">
+              <h4>Add a new team member</h4>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <select id="members.names" name="members.names" class="form-control">
+                  {{#users}}
+                    <option>{{name}}</option>
+                  {{/users}}
+                </select>
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <!-- <input type="text" id="members.roles" name="members.roles" class="form-control" placeholder="New Member Role"></input> -->
+                <select id="members_roles" name="members.roles" class="form-control">
+                  {{#roles}}
+                    <option>{{name}}</option>
+                  {{/roles}}
+                </select>
+              </div>
+            </div>
+            <div class="col-1">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="hidden" id="id" name="id" value="{{team.id}}" />
+          <input type="hidden" id="rev" name="rev" value="{{team.rev}}" />
+          <input type="hidden" id="created" name="created" value="{{team.created}}" />
+          <input type="hidden" id="type" name="type" value="team" />
+          <input name="_csrf" type="hidden" value="{{_csrf.token}}" />
+          <div class="ml-auto">
+            <button class="btn btn-primary" type="submit">Save Team</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col">
+    <img src="/images/yorkie.png" class="img-fluid" />
+    <div class="mt-3 text-center">
+      <form action="/team/delete" method="post" class="form">
+        <div class="form-group">
+          <input type="hidden" name="type" value="statusUpdate" />
+          <input name="_csrf" type="hidden" value="{{_csrf.token}}" />
+          <input type="hidden" id="id" name="id" value="{{team.id}}" />
+          <button type="submit" class="btn btn-danger btn-sm" type="submit">Delete Team</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{>footer}}

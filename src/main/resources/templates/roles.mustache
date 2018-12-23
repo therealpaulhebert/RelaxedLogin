@@ -1,0 +1,77 @@
+{{>header}}
+<h1>{{h1}}</h1>
+<p class="lead">Add or update roles for team members.</p>
+<div class="row">
+  <div class="col-8">
+    <p>Roles are available across all teams</p>
+    <h4>Add a new role</h4>
+    <form action="/teams/role/new" method="post" class="mb-3">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="name">Role Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{role.name}}" required></input>
+          </div>
+          <div class="form-group">
+            <label for="description">Role Description</label>
+            <input type="text" id="description" name="description" value="{{role.description}}" class="form-control" required></input>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <input type="hidden" name="id" value="{{role.id}}" />
+          <input type="hidden" name="rev" value="{{role.rev}}" />
+          <input type="hidden" name="type" value="role" />
+          <input name="_csrf" type="hidden" value="{{_csrf.token}}" />
+          <button class="btn btn-primary ml-auto" type="submit">{{buttonText}}</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="col">
+    <div class="mt-3 text-center">
+    <img src="/images/germanshepSm.png" class="img-fluid" />
+    {{#showDelete}}
+      <form action="/teams/role/delete" method="post" class="form">
+        <div class="form-group">
+          <input name="_csrf" type="hidden" value="{{_csrf.token}}" />
+          <input type="hidden" id="id" name="id" value="{{role.id}}" />
+          <button type="submit" class="btn btn-danger btn-sm" type="submit">Delete Role</button>
+        </div>
+      </form>
+      {{/showDelete}}
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <h4>Edit Existing Roles</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col"><img src="/images/pencilSm.png" alt="Edit Column" class="img-fluid" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#roles}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{description}}</td>
+            <td><a href="/teams/role/{{id}}">Edit</a></td>
+          </tr>
+        {{/roles}}
+      </tbody>
+    </table>
+
+  </div>
+</div>
+{{>footer}}
