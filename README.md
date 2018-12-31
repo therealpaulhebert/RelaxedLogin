@@ -1,6 +1,8 @@
 ## Synopsis
 
-This project is a Spring Boot Web / Security based web app. It uses Mustache as the view templating engine, with Bootstrap for styling, and jQuery for some UI slickness. The User login is based in CouchDb's built in _user database. Althought the Ektorp CouchDb library was used, I didn't extend the classes with the CouchDbRepositorySupport. I used the STS IDE to build this project.
+This project is a Spring Boot Web / Security based web app. It uses Mustache as the view templating engine, with Bootstrap for styling, and jQuery for some UI slickness. The User login is based in CouchDb's built in _user database. Although the Ektorp CouchDb library was used, I didn't extend the classes with the CouchDbRepositorySupport. I used the STS IDE to build this project.
+
+Users can create and edit status updates relating a team. They can search through their status updates and edit those statues. Users can also create new teams and edit teams for which they are an Admin.
 
 ## Motivation
 
@@ -24,3 +26,12 @@ GNU GPL.
 ## Screen Shots
 Login Screen
 ![Screen shot of login](/images/LoginScreen.png?raw=true "Login Screen")
+
+New User Registration
+![New User Screen](/images/NewUser.png?raw=true "New User Screen")
+
+After login, users are taken to a screen where they can see existing status.
+![Start Page](/images/ExistingStatuses.png?raw=true "Statuses Screen")
+
+Clicking the Create Update link shows a form where users can create a new status update.
+![New Status Update Page](/images/NewStatus.png?raw=true "New Status Screen")
