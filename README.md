@@ -1,6 +1,6 @@
 ## Synopsis
 
-This project is a Spring Boot Web / Security based web app. It uses Mustache as the view templating engine, with Bootstrap for styling, and jQuery for some UI slickness. The User login is based in CouchDb's
+This project is a Spring Boot Web / Security based web app. It uses Mustache as the view templating engine, with Bootstrap for styling, and jQuery for some UI slickness. The User login is based in CouchDb's built in _user database. Althought the Ektorp CouchDb library was used, I didn't extend the classes with the CouchDbRepositorySupport. I used the STS IDE to build this project.
 
 ## Motivation
 
@@ -8,7 +8,9 @@ I couldn't find a full example of Spring Boot and Mustache. I had some trouble g
 
 ## Installation
 
->To be added later
+Download the project and open in Eclipse or STS. Download CouchDB and install locally. You will need to create the views for CouchDB also. In the src/main/resources/templates folder, the views.js file can be referenced to build views in CouchDB. This is not automatic, but a reference for manually building the views.
+
+I also used a self signed certificate for HTTPS hosting. You should create one yourself and point to it in the /src/main/resources/application.properties file
 
 ## API Reference
 
@@ -17,4 +19,8 @@ I couldn't find a full example of Spring Boot and Mustache. I had some trouble g
 
 ## License
 
-GNU GPL
+GNU GPL.
+
+## Screen Shots
+Login Screen
+![Screen shot of login](/images/LoginScreen.png?raw=true "Login Screen")
