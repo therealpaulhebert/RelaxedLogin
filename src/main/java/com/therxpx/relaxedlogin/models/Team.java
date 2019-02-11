@@ -2,9 +2,11 @@ package com.therxpx.relaxedlogin.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Team {
+	@JsonIgnore
 	private String ADMIN = "Admin";
 	
 	@JsonProperty("_id")
@@ -82,6 +84,7 @@ public class Team {
 		this.type = type;
 	}
 	
+	@JsonIgnore
 	public String getAdmin() {
 		return this.ADMIN;
 	}
